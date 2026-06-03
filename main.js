@@ -2,6 +2,19 @@
    RADIO EMISOR COMÚN — JS
    =========================== */
 
+// ---- MANIFIESTO FETCH ----
+fetch('manifiesto.md')
+  .then(r => r.text())
+  .then(text => {
+    const container = document.getElementById('manifiesto-content');
+    if (!container) return;
+    const paragraphs = text
+      .split(/\n\n+/)
+      .map(s => s.trim())
+      .filter(s => s && !s.startsWith('#'));
+    container.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+  });
+
 // ---- SMOOTH NAV ACTIVE STATE ----
 const navLinks = document.querySelectorAll('.header-inner nav a');
 const sections = document.querySelectorAll('section[id]');
